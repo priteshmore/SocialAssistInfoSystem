@@ -24,11 +24,11 @@
 @if (Elements!=null)
 {
     <MudStack Row="true">
-    <MudTextField @bind-Value="searchString" Label="Search" Variant="Variant.Text" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" Immediate="true" OnBlur="ApplyFilter" />
+        <MudTextField @bind-Value="searchString" Label="Search" Variant="Variant.Text" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" Immediate="true" OnBlur="ApplyFilter" />
 
-    <MudButton OnClick="ApplyFilter" Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.FilterList">
-        Apply Filter
-    </MudButton>
+        <MudButton OnClick="ApplyFilter" Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.FilterList">
+            Apply Filter
+        </MudButton>
     </MudStack>
     <MudPaper Class="p-4">
         <MudTable Items="@FilteredItems" @ref="table" @bind-Page="currentPage"
@@ -43,34 +43,22 @@
             </ToolBarContent>
 
             <HeaderContent>
+                <MudTh>Id</MudTh>
                 <MudTh>FirstName</MudTh>
                 <MudTh>MiddleName</MudTh>
                 <MudTh>LastName</MudTh>
-                @*  <MudTh>Age</MudTh> *@
                 <MudTh>Actions</MudTh>
             </HeaderContent>
 
             <RowTemplate>
-                @* <MudTd DataLabel="First Name">@context.FirstName</MudTd> *@
                 <MudTd DataLabel="First Name">
-                    @if (selectedApplicationItem == context)
-                    {
-                        <MudTextField @bind-Value="@context.FirstName" />
-                    }
-                    else
-                    {
+                    @context.Id
+                </MudTd>
+                <MudTd DataLabel="First Name">
                         @context.FirstName
-                    }
                 </MudTd>
                 <MudTd DataLabel="Middle Name">
-                    @if (selectedApplicationItem == context)
-                    {
-                        <MudTextField @bind-Value="@context.MiddleName" />
-                    }
-                    else
-                    {
                         @context.MiddleName
-                    }
                 </MudTd>
                 <MudTd DataLabel="Last Name">
                     @if (selectedApplicationItem == context)
@@ -87,15 +75,15 @@
                 </MudTd> *@
                 <MudTd>
 
-                   
-                        <MudButton StartIcon="@Icons.Material.Filled.Edit"
-                        OnClick="() => OpenEditDialog(context)"
-                        Color="Color.Info"
-                        Variant="Variant.Filled"
-                        Size="Size.Small">
-                            Edit
-                        </MudButton>
-                    
+
+                    <MudButton StartIcon="@Icons.Material.Filled.Edit"
+                    OnClick="() => OpenEditDialog(context)"
+                    Color="Color.Info"
+                    Variant="Variant.Filled"
+                    Size="Size.Small">
+                        Edit
+                    </MudButton>
+
                     <MudButton Icon="@Icons.Material.Filled.Delete" OnClick="() => Delete(context)" Color="Color.Error" Variant="Variant.Filled" Size="Size.Small" >Delete</MudButton>
                 </MudTd>
             </RowTemplate>
@@ -132,6 +120,7 @@ else
             List<ApplicationItem> lstData = new List<ApplicationItem>();
 
             ApplicationItem obj = new ApplicationItem();
+            obj.Id = 0;
             obj.FirstName = "Pritesh";
             obj.MiddleName = "Pradeep";
             obj.LastName = "More";

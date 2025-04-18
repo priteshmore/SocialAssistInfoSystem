@@ -2,14 +2,17 @@
 @using FluentValidation
 @using SocialAssistInfoSystem.Client.Data
 @using SocialAssistInfoSystem.Client.Data.Enum
+@using System.ComponentModel.DataAnnotations
+@using SocialAssistInfoSystem.Client.Util
 <h3>Application</h3>
 
 <MudCard>
-    <MudForm Model="@m_objApplicationModel" 
-             @ref="@m_objMudForm" 
-             Validation="@(m_objOrderValidator.ValidateValue)" 
+    <MudForm Model="@m_objApplicationModel"
+             @ref="@m_objMudForm"
+             Validation="@(m_objOrderValidator.ValidateValue)"
              ValidationDelay="0">
         <MudCardContent>
+
             <MudPaper Class="d-flex flex-wrap gap-4" MaxWidth="auto" Elevation="0">
 
                 <MudTextField @bind-Value="m_objApplicationModel.FirstName"
@@ -33,14 +36,14 @@
             <MudSelect @bind-Value="m_objApplicationModel.Gender" Label="Select Gender" HelperText="Enum" OpenIcon="@Icons.Material.Filled.Person" AdornmentColor="Color.Secondary">
                 @foreach (Gender item in Enum.GetValues(typeof(Gender)))
                 {
-                    <MudSelectItem Value="@item">@item</MudSelectItem>
+                    <MudSelectItem Value="@item">@item.GetDisplayName()</MudSelectItem>
                 }
             </MudSelect>
 
             <MudSelect @bind-Value="m_objApplicationModel.MaritalStatus" Label="Select Marital Status" OpenIcon="@Icons.Material.Filled.Person2" AdornmentColor="Color.Secondary">
                 @foreach (MaritalStatus item in Enum.GetValues(typeof(MaritalStatus)))
                 {
-                    <MudSelectItem Value="@item">@item</MudSelectItem>
+                    <MudSelectItem Value="@item">@item.GetDisplayName()</MudSelectItem>
                 }
             </MudSelect>
 
@@ -49,7 +52,7 @@
                           Immediate="true"
                           Label="Passport No" />
 
-     
+
             <MudPaper Class="d-flex flex-wrap gap-4" MaxWidth="auto" Elevation="0">
                 <MudSelect @bind-Value="Country" Label="Country" Variant="Variant.Text">
                     <MudSelectItem Value="@("Austria")">
@@ -127,13 +130,14 @@
             <MudSelect @bind-Value="m_objApplicationModel.Scheme" Label="Select Scheme" OpenIcon="@Icons.Material.Filled.Person2" AdornmentColor="Color.Secondary">
                 @foreach (Scheme item in Enum.GetValues(typeof(Scheme)))
                 {
-                    <MudSelectItem Value="@item">@item</MudSelectItem>
+                    <MudSelectItem Value="@item">@item.GetDisplayName()</MudSelectItem>
                 }
             </MudSelect>
 
             <MudTextField @bind-Value="m_objApplicationModel.AnyOtherScheme"
                           For="@(() => m_objApplicationModel.AnyOtherScheme)"
                           Immediate="true"
+                          Disabled="@(m_objApplicationModel.Scheme!=Scheme.ANY_OTHER)"
                           Label="Any Other Scheme" />
         </MudCardContent>
     </MudForm>

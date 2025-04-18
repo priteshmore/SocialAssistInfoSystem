@@ -1,9 +1,14 @@
-﻿namespace SocialAssistInfoSystem.Client.Data.Enum
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SocialAssistInfoSystem.Client.Data.Enum
 {
     public enum MaritalStatus
     {
-        UNMARRIED=0,
-        MARRIED=1,
-        OTHER=2
+        [Display(Name = "UnMarried")]
+        UNMARRIED =0,
+        [Display(Name = "Married")]
+        MARRIED =1,
+        [Display(Name = "Any Other")]
+        OTHER =2
     }
 }

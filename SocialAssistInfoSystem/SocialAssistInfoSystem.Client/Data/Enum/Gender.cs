@@ -1,9 +1,14 @@
-﻿namespace SocialAssistInfoSystem.Client.Data.Enum
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SocialAssistInfoSystem.Client.Data.Enum
 {
     public enum Gender
     {
-        MALE=0,
-        FEMALE=1,
-        OTHER=2
+        [Display(Name = "Male")]
+        MALE =0,
+        [Display(Name = "Female")]
+        FEMALE =1,
+        [Display(Name = "Any Other")]
+        OTHER =2
     }
 }
