@@ -1,0 +1,23 @@
+﻿@using SocialAssistInfoSystem.Client.Data
+@inject IDialogService DialogService
+@using MudBlazor
+<MudDialog>
+    <DialogContent>
+        <MudTextField @bind-Value="Item.FirstName" Label="First Name" />
+        <MudTextField @bind-Value="Item.MiddleName" Label="Middle Name" />
+        <MudTextField @bind-Value="Item.LastName" Label="Last Name" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Submit" Color="Color.Primary">Save</MudButton>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] IMudDialogInstance MudDialog { get; set; }
+
+    [Parameter] public ApplicationItem Item { get; set; } = new();
+
+    private void Submit() => MudDialog.Close(DialogResult.Ok(Item));
+    private void Cancel() => MudDialog.Cancel();
+}

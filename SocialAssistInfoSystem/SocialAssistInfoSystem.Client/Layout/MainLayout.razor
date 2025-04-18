@@ -1,0 +1,84 @@
+﻿@inherits LayoutComponentBase
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+
+<MudThemeProvider IsDarkMode="true" />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudStaticNavDrawerToggle DrawerId="nav-drawer" Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" />
+        <MudText Typo="Typo.h5" Class="ml-3">Social Assistance Information System</MudText>
+        <MudSpacer />
+        <AuthorizeView>
+            <MudAvatar Color="Color.Primary">@userName?.ToUpper().FirstOrDefault()</MudAvatar>
+
+            @* <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" /> *@
+            <MudMenu Dense
+                     Variant="Variant.Text"
+                     Size="Size.Medium"
+                     Color="Color.Inherit"
+                     Icon="@Icons.Material.TwoTone.MoreVert">
+
+                <MudMenu StartIcon="@Icons.Material.TwoTone.Settings"
+                         IconColor="Color.Primary"
+                         Label="Settings">
+                    <MudMenuItem Icon="@Icons.Material.TwoTone.DarkMode"
+                                 IconColor="Color.Secondary"
+                                 Label="Dark Theme" />
+                    <MudMenuItem Icon="@Icons.Material.TwoTone.LightMode"
+                                 IconColor="Color.Secondary"
+                                 Label="Light Theme" />
+                </MudMenu>
+
+                <MudDivider />
+
+                @* <MudMenuItem Href="/"
+                         ForceLoad
+                         Icon="@Icons.Material.TwoTone.Login"
+                         IconColor="Color.Primary"
+                         Label="Sign In" /> *@
+
+                <MudMenuItem Href="/"
+                             ForceLoad
+                             Icon="@Icons.Material.TwoTone.Logout"
+                             IconColor="Color.Primary"
+                             Label="Sign Out" />
+
+            </MudMenu>
+        </AuthorizeView>
+    </MudAppBar>
+    <MudDrawer id="nav-drawer" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+        <NavMenu />
+    </MudDrawer>
+    <MudMainContent Class="mt-16 pa-4">
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
+    <span class="dismiss">🗙</span>
+</div>
+
+@code {
+    private bool _drawerOpen = true;
+    private string? userName;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity != null && user.Identity.IsAuthenticated)
+        {
+            userName = user.Identity.Name;
+        }
+    }
+}
+
+
+
