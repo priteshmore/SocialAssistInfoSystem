@@ -100,7 +100,7 @@ namespace SocialAssistInfoSystem.Migrations
                     DOB = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Gender = table.Column<int>(type: "int", nullable: false),
                     MaritalStatus = table.Column<int>(type: "int", nullable: false),
-                    PassportNo = table.Column<int>(type: "int", nullable: false),
+                    IDOrPassportNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -121,7 +121,7 @@ namespace SocialAssistInfoSystem.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ApplicationId = table.Column<int>(type: "int", nullable: false),
-                    SchemeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SchemeType = table.Column<int>(type: "int", nullable: false),
                     OtherScheme = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>

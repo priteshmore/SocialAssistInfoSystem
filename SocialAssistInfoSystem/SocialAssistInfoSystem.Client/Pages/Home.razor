@@ -73,7 +73,7 @@ else
                     <MudTd DataLabel="Middle Name">
                         @context.Status
                     </MudTd>
-                  
+
                     <MudTd>
                         <MudButton StartIcon="@Icons.Material.Filled.Edit"
                         OnClick="() => OpenEditDialog(context)"
@@ -197,11 +197,11 @@ else
 
 
 
-          
+
 
         }
 
-       // Re-render after data load
+        // Re-render after data load
 
         // if (firstRender)
         // {
@@ -222,6 +222,7 @@ else
     {
         Elements.Remove(Item);
         FilteredItems = Elements;
+        LoadData();
         // ApplicationDto objApplicationDto = Extensions.Convert(Item);
         // var response = await objHttpClient.DeleteFromJsonAsync($"api/application/{objApplicationDto.Id}", objApplicationDto);
 
@@ -272,6 +273,8 @@ else
 
                 if (response.IsSuccessStatusCode)
                 {
+                    LoadData();
+
                     // Optionally read response content
                     var updatedApplications = await response.Content.ReadFromJsonAsync<ApplicationDto>();
 
@@ -328,6 +331,8 @@ else
 
                 try
                 {
+                    var jsonString = JsonSerializer.Serialize(obj);
+
                     // Test obj = new Test();
                     var response = await objHttpClient.PostAsJsonAsync("api/application", obj);  // You can pass the body of the POST request if needed
 
@@ -335,6 +340,8 @@ else
                     response.EnsureSuccessStatusCode();
 
                     Elements.Add(Item);
+
+                    LoadData();
                     // FilteredItems.Add(Item);
 
                     Snackbar.Add($"FirstName: {Item.Profile.FirstName}, MiddleName: {Item.Profile.MiddleName}", Severity.Success);

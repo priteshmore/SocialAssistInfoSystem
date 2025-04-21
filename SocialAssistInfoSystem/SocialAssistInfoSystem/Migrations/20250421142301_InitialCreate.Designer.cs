@@ -12,7 +12,7 @@ using SocialAssistInfoSystem.Data;
 namespace SocialAssistInfoSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250421133525_InitialCreate")]
+    [Migration("20250421142301_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -294,6 +294,10 @@ namespace SocialAssistInfoSystem.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<string>("IDOrPassportNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -304,9 +308,6 @@ namespace SocialAssistInfoSystem.Migrations
                     b.Property<string>("MiddleName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PassportNo")
-                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -335,9 +336,8 @@ namespace SocialAssistInfoSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SchemeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SchemeType")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

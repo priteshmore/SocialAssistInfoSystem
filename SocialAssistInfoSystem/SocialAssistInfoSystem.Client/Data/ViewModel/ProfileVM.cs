@@ -24,7 +24,7 @@ namespace SocialAssistInfoSystem.Client.Data.ViewModel
 
         public MaritalStatus MaritalStatus { get; set; }
 
-        public string PassportNo { get; set; }
+        public string IDOrPassportNo { get; set; }
 
         public string PhoneNumber { get; set; }
 

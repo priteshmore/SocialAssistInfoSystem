@@ -87,7 +87,7 @@ namespace SocialAssistInfoSystem.Client.Util
                 objResult.Profile.MaritalStatus = (MaritalStatus)objApplicationDTO.Profile.MaritalStatus;
                 objResult.Profile.Gender = (Gender)objApplicationDTO.Profile.Gender;
                 objResult.Profile.DOB = objApplicationDTO.Profile.DOB;
-                objResult.Profile.PassportNo = objApplicationDTO.Profile.IDOrPassportNo;
+                objResult.Profile.IDOrPassportNo = objApplicationDTO.Profile.IDOrPassportNo;
                 objResult.Profile.PhoneNumber = objApplicationDTO.Profile.PhoneNumber;
             }
 
@@ -147,7 +147,7 @@ namespace SocialAssistInfoSystem.Client.Util
             objResult.Profile.MaritalStatus = (int)objApplicationViewModel.Profile.MaritalStatus;
             objResult.Profile.Gender = (int)objApplicationViewModel.Profile.Gender;
             objResult.Profile.DOB = objApplicationViewModel.Profile.DOB;
-            objResult.Profile.IDOrPassportNo = objApplicationViewModel.Profile.PassportNo;
+            objResult.Profile.IDOrPassportNo = objApplicationViewModel.Profile.IDOrPassportNo;
             objResult.Profile.PhoneNumber = objApplicationViewModel.Profile.PhoneNumber;
 
             objResult.Scheme = new SchemeDto();

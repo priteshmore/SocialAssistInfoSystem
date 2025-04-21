@@ -11,20 +11,20 @@ namespace SocialAssistInfoSystem.Client.Data
     {
         public ApplicationFluentValidator()
         {
-            RuleFor(x => x.Profile.FirstName)
-                .NotEmpty()
-                .Length(1, 100);
-            RuleFor(x => x.Profile.MiddleName)
-               .NotEmpty()
-               .Length(1, 100);
-            RuleFor(x => x.Profile.LastName)
-              .NotEmpty()
-              .Length(1, 100);
+            //RuleFor(x => x.Profile.FirstName)
+            //    .NotEmpty()
+            //    .Length(1, 100);
+            //RuleFor(x => x.Profile.MiddleName)
+            //   .NotEmpty()
+            //   .Length(1, 100);
+            //RuleFor(x => x.Profile.LastName)
+            //  .NotEmpty()
+            //  .Length(1, 100);
 
-            RuleFor(x => x.Profile.DOB)
-            .NotEmpty();
+            //RuleFor(x => x.Profile.DOB)
+            //.NotEmpty();
 
-            RuleFor(x => x.Address).SetValidator(new AddressDetailsModelFluentValidator());
+            //RuleFor(x => x.Address).SetValidator(new AddressDetailsModelFluentValidator());
 
             //RuleFor(x => x.PassportNo)
             //    .NotEmpty()

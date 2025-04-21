@@ -10,7 +10,7 @@ namespace SocialAssistInfoSystem.Data.DBEntity
         [JsonIgnore]
         public Application Application { get; set; }
 
-        public string SchemeName { get; set; }
+        public int SchemeType { get; set; }
 
         public  string OtherScheme { get; set; }
     }

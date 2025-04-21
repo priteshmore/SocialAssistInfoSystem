@@ -22,7 +22,7 @@ namespace SocialAssistInfoSystem.Data.DBEntity
 
         public int MaritalStatus { get; set; }
 
-        public int PassportNo { get; set; }
+        public string IDOrPassportNo { get; set; }
 
         public string PhoneNumber { get; set; }
 

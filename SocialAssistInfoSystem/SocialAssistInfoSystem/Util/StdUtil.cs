@@ -35,13 +35,13 @@ namespace SocialAssistInfoSystem.Util
             objResult.Profile.MaritalStatus = objApplicationDto.Profile.MaritalStatus;
             objResult.Profile.Gender = objApplicationDto.Profile.Gender;
             objResult.Profile.DOB = objApplicationDto.Profile.DOB;
-            objResult.Profile.PassportNo = objApplicationDto.Profile.PassportNo;
+            objResult.Profile.IDOrPassportNo = objApplicationDto.Profile.IDOrPassportNo;
             objResult.Profile.PhoneNumber = objApplicationDto.Profile.PhoneNumber;
 
 
             objResult.Scheme = new Scheme();
             objResult.Scheme.Id = objApplicationDto.Scheme.Id;
-            objResult.Scheme.SchemeName = objApplicationDto.Scheme.SchemeName.ToString();
+            objResult.Scheme.SchemeType = objApplicationDto.Scheme.SchemeType;
             objResult.Scheme.OtherScheme = objApplicationDto.Scheme.OtherScheme;
 
             objResult.Address = new Address();
@@ -67,10 +67,10 @@ namespace SocialAssistInfoSystem.Util
             objTarget.Profile.MaritalStatus = objSource.Profile.MaritalStatus;
             objTarget.Profile.Gender = objSource.Profile.Gender;
             objTarget.Profile.DOB = objSource.Profile.DOB;
-            objTarget.Profile.PassportNo = objSource.Profile.PassportNo;
+            objTarget.Profile.IDOrPassportNo = objSource.Profile.IDOrPassportNo;
             objTarget.Profile.PhoneNumber = objSource.Profile.PhoneNumber;
 
-            objTarget.Scheme.SchemeName = objSource.Scheme.SchemeName.ToString();
+            objTarget.Scheme.SchemeType = objSource.Scheme.SchemeType;
             objTarget.Scheme.OtherScheme = objSource.Scheme.OtherScheme;
 
             objTarget.Address.Country = objSource.Address.Country;

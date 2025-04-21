@@ -47,10 +47,10 @@
             }
         </MudSelect>
 
-        <MudTextField @bind-Value="Item.Profile.PassportNo"
-                      For="@(() => Item.Profile.PassportNo)"
+        <MudTextField @bind-Value="Item.Profile.IDOrPassportNo"
+                      For="@(() => Item.Profile.IDOrPassportNo)"
                       Immediate="true"
-                      Label="Passport No" />
+                      Label="ID / Passport No" />
 
         @* <MudPaper Class="d-flex flex-wrap gap-4" MaxWidth="auto" Elevation="0">
             <MudSelect @bind-Value="Country" Label="Country" Variant="Variant.Text">
@@ -124,6 +124,13 @@
                       Disabled="@(Item.Scheme.SchemeType!=SchemeOption.ANY_OTHER)"
                       Label="Any Other Scheme" />
 
+
+        <MudSelect @bind-Value="Item.Status" Label="Select Status" OpenIcon="@Icons.Material.Filled.Approval" AdornmentColor="Color.Secondary">
+            @foreach (ApplicationStatus item in Enum.GetValues(typeof(ApplicationStatus)))
+            {
+                <MudSelectItem Value="@item">@item.GetDisplayName()</MudSelectItem>
+            }
+        </MudSelect>
 
 
     </DialogContent>
