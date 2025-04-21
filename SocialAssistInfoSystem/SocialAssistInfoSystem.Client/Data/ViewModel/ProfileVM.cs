@@ -1,13 +1,21 @@
 ﻿using SocialAssistInfoSystem.Client.Data.Enum;
-using SocialAssistInfoSystem.Client.Data.ViewModel;
+using System.Text.Json.Serialization;
 
-namespace SocialAssistInfoSystem.Client.Data
+namespace SocialAssistInfoSystem.Client.Data.ViewModel
 {
-    public class ApplicationViewModel
+    public class ProfileVm
     {
         public int Id { get; set; }
+
+        //public int ApplicationId { get; set; }
+
+        //[JsonIgnore]
+        //public Application Application { get; set; }
+
         public string FirstName { get; set; }
+
         public string MiddleName { get; set; }
+
         public string LastName { get; set; }
 
         public DateTime? DOB { get; set; }
@@ -16,15 +24,9 @@ namespace SocialAssistInfoSystem.Client.Data
 
         public MaritalStatus MaritalStatus { get; set; }
 
-        public SchemeOption Scheme { get; set; }
-
-        public int PassportNo { get; set; }
+        public string PassportNo { get; set; }
 
         public string PhoneNumber { get; set; }
-
-        public string OtherScheme { get; set; }
-
-        public AddressVM Address { get; set; }
 
     }
 }

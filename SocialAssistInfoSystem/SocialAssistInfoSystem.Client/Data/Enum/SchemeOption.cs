@@ -2,7 +2,7 @@
 
 namespace SocialAssistInfoSystem.Client.Data.Enum
 {
-    public enum Scheme
+    public enum SchemeOption
     {
         [Display(Name = "Orphans and vulnerable children")]
         ORPHANS_AND_VULNERABLE_CHILDER = 0,

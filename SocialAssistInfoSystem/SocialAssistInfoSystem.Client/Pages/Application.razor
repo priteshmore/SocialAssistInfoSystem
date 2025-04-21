@@ -33,7 +33,7 @@
 
             <MudDatePicker Label="Date of Birth" @bind-Date="m_objApplicationModel.DOB" />
 
-            <MudSelect @bind-Value="m_objApplicationModel.Gender" Label="Select Gender" HelperText="Enum" OpenIcon="@Icons.Material.Filled.Person" AdornmentColor="Color.Secondary">
+            <MudSelect @bind-Value="m_objApplicationModel.Gender" Label="Select Gender" OpenIcon="@Icons.Material.Filled.Person" AdornmentColor="Color.Secondary">
                 @foreach (Gender item in Enum.GetValues(typeof(Gender)))
                 {
                     <MudSelectItem Value="@item">@item.GetDisplayName()</MudSelectItem>
@@ -52,67 +52,51 @@
                           Immediate="true"
                           Label="Passport No" />
 
-
             <MudPaper Class="d-flex flex-wrap gap-4" MaxWidth="auto" Elevation="0">
                 <MudSelect @bind-Value="Country" Label="Country" Variant="Variant.Text">
-                    <MudSelectItem Value="@("Austria")">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_Austria.svg" height="14" class="mr-1" /> Austria
-                    </MudSelectItem>
-                    <MudSelectItem Value="@("Hungary")">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Hungary.png" height="14" class="mr-1" /> Hungary
-                    </MudSelectItem>
-                    <MudSelectItem Value="@("Sweden")">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Flag_of_Sweden_fixed.svg" height="14" class="mr-1" /> Sweden
-                    </MudSelectItem>
+                    @foreach (string item in CountryItems)
+                    {
+                        <MudSelectItem Value="@item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_Austria.svg" height="14" class="mr-1" /> @item
+                        </MudSelectItem>
+                    }   
                 </MudSelect>
 
                 <MudSelect @bind-Value="Subcountry" Label="Subcountry" Variant="Variant.Text" Disabled="string.IsNullOrEmpty(Country)">
-                    <MudSelectItem Value="@("Austria")">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_Austria.svg" height="14" class="mr-1" /> Austria
-                    </MudSelectItem>
-                    <MudSelectItem Value="@("Hungary")">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Hungary.png" height="14" class="mr-1" /> Hungary
-                    </MudSelectItem>
-                    <MudSelectItem Value="@("Sweden")">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Flag_of_Sweden_fixed.svg" height="14" class="mr-1" /> Sweden
-                    </MudSelectItem>
+                    @foreach (string item in SubcountryItems)
+                    {
+                        <MudSelectItem Value="@item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_Austria.svg" height="14" class="mr-1" /> @item
+                        </MudSelectItem>
+                    } 
                 </MudSelect>
 
                 <MudSelect @bind-Value="Location" Label="Location" Variant="Variant.Text" Disabled="string.IsNullOrEmpty(Subcountry)">
-                    <MudSelectItem Value="@("Austria")">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_Austria.svg" height="14" class="mr-1" /> Austria
-                    </MudSelectItem>
-                    <MudSelectItem Value="@("Hungary")">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Hungary.png" height="14" class="mr-1" /> Hungary
-                    </MudSelectItem>
-                    <MudSelectItem Value="@("Sweden")">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Flag_of_Sweden_fixed.svg" height="14" class="mr-1" /> Sweden
-                    </MudSelectItem>
+                    @foreach (string item in LocationItems)
+                    {
+                        <MudSelectItem Value="@item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_Austria.svg" height="14" class="mr-1" /> @item
+                        </MudSelectItem>
+                    }
                 </MudSelect>
 
                 <MudSelect @bind-Value="SubLocation" Label="Sub Location" Variant="Variant.Text" Disabled="string.IsNullOrEmpty(Location)">
-                    <MudSelectItem Value="@("Austria")">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_Austria.svg" height="14" class="mr-1" /> Austria
-                    </MudSelectItem>
-                    <MudSelectItem Value="@("Hungary")">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Hungary.png" height="14" class="mr-1" /> Hungary
-                    </MudSelectItem>
-                    <MudSelectItem Value="@("Sweden")">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Flag_of_Sweden_fixed.svg" height="14" class="mr-1" /> Sweden
-                    </MudSelectItem>
+                    @foreach (string item in SubLocationItems)
+                    {
+                        <MudSelectItem Value="@item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_Austria.svg" height="14" class="mr-1" /> @item
+                        </MudSelectItem>
+                    }
                 </MudSelect>
 
 
                 <MudSelect @bind-Value="Village" Label="Village" Variant="Variant.Text" Disabled="string.IsNullOrEmpty(SubLocation)">
-                    <MudSelectItem Value="@("Austria")">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_Austria.svg" height="14" class="mr-1" /> Austria
-                    </MudSelectItem>
-                    <MudSelectItem Value="@("Hungary")">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Hungary.png" height="14" class="mr-1" /> Hungary
-                    </MudSelectItem>
-                    <MudSelectItem Value="@("Sweden")">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Flag_of_Sweden_fixed.svg" height="14" class="mr-1" /> Sweden
-                    </MudSelectItem>
+                    @foreach (string item in VillageItems)
+                    {
+                        <MudSelectItem Value="@item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_Austria.svg" height="14" class="mr-1" /> @item
+                        </MudSelectItem>
+                    }
                 </MudSelect>
             </MudPaper>
 
@@ -128,7 +112,7 @@
 
 
             <MudSelect @bind-Value="m_objApplicationModel.Scheme" Label="Select Scheme" OpenIcon="@Icons.Material.Filled.Person2" AdornmentColor="Color.Secondary">
-                @foreach (Scheme item in Enum.GetValues(typeof(Scheme)))
+                @foreach (SchemeOption item in Enum.GetValues(typeof(SchemeOption)))
                 {
                     <MudSelectItem Value="@item">@item.GetDisplayName()</MudSelectItem>
                 }
@@ -137,7 +121,7 @@
             <MudTextField @bind-Value="m_objApplicationModel.AnyOtherScheme"
                           For="@(() => m_objApplicationModel.AnyOtherScheme)"
                           Immediate="true"
-                          Disabled="@(m_objApplicationModel.Scheme!=Scheme.ANY_OTHER)"
+                          Disabled="@(m_objApplicationModel.Scheme!=SchemeOption.ANY_OTHER)"
                           Label="Any Other Scheme" />
         </MudCardContent>
     </MudForm>

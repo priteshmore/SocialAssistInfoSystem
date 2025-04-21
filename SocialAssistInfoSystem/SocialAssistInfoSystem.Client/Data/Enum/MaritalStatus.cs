@@ -4,7 +4,7 @@ namespace SocialAssistInfoSystem.Client.Data.Enum
 {
     public enum MaritalStatus
     {
-        [Display(Name = "UnMarried")]
+        [Display(Name = "Unmarried")]
         UNMARRIED =0,
         [Display(Name = "Married")]
         MARRIED =1,

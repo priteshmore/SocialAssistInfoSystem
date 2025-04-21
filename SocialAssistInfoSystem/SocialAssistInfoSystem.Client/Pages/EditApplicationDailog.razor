@@ -1,11 +1,131 @@
 ﻿@using SocialAssistInfoSystem.Client.Data
+@using SocialAssistInfoSystem.Client.Data.ViewModel
 @inject IDialogService DialogService
 @using MudBlazor
+@using SocialAssistInfoSystem.Client.Data.Enum
+@using SocialAssistInfoSystem.Client.Util
+
 <MudDialog>
     <DialogContent>
+      @*   <MudTextField @bind-Value="Item.Id" Label="ID"  Disabled="true"/>
         <MudTextField @bind-Value="Item.FirstName" Label="First Name" />
         <MudTextField @bind-Value="Item.MiddleName" Label="Middle Name" />
         <MudTextField @bind-Value="Item.LastName" Label="Last Name" />
+        <MudDatePicker @bind-Date="Item.DOB" Label="Date of Birth" /> *@
+
+        <MudPaper Class="d-flex flex-wrap gap-4" MaxWidth="auto" Elevation="0">
+
+            <MudTextField @bind-Value="Item.Profile.FirstName"
+                          For="@(() => Item.Profile.FirstName)"
+                          Immediate="true"
+                          Label="First Name" />
+
+            <MudTextField @bind-Value="Item.Profile.MiddleName"
+                          For="@(() => Item.Profile.MiddleName)"
+                          Immediate="true"
+                          Label="Middle Name" />
+
+            <MudTextField @bind-Value="Item.Profile.LastName"
+                          For="@(() => Item.Profile.LastName)"
+                          Immediate="true"
+                          Label="Last Name" />
+        </MudPaper>
+
+        <MudDatePicker Label="Date of Birth" @bind-Date="Item.Profile.DOB" />
+
+        <MudSelect @bind-Value="Item.Profile.Gender" Label="Select Gender" OpenIcon="@Icons.Material.Filled.Person" AdornmentColor="Color.Secondary">
+            @foreach (Gender item in Enum.GetValues(typeof(Gender)))
+            {
+                <MudSelectItem Value="@item">@item.GetDisplayName()</MudSelectItem>
+            }
+        </MudSelect>
+
+        <MudSelect @bind-Value="Item.Profile.MaritalStatus" Label="Select Marital Status" OpenIcon="@Icons.Material.Filled.Person2" AdornmentColor="Color.Secondary">
+            @foreach (MaritalStatus item in Enum.GetValues(typeof(MaritalStatus)))
+            {
+                <MudSelectItem Value="@item">@item.GetDisplayName()</MudSelectItem>
+            }
+        </MudSelect>
+
+        <MudTextField @bind-Value="Item.Profile.PassportNo"
+                      For="@(() => Item.Profile.PassportNo)"
+                      Immediate="true"
+                      Label="Passport No" />
+
+        @* <MudPaper Class="d-flex flex-wrap gap-4" MaxWidth="auto" Elevation="0">
+            <MudSelect @bind-Value="Country" Label="Country" Variant="Variant.Text">
+                @foreach (string item in CountryItems)
+                {
+                    <MudSelectItem Value="@item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_Austria.svg" height="14" class="mr-1" /> @item
+                    </MudSelectItem>
+                }
+            </MudSelect>
+
+            <MudSelect @bind-Value="Subcountry" Label="Subcountry" Variant="Variant.Text" Disabled="string.IsNullOrEmpty(Country)">
+                @foreach (string item in SubcountryItems)
+                {
+                    <MudSelectItem Value="@item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_Austria.svg" height="14" class="mr-1" /> @item
+                    </MudSelectItem>
+                }
+            </MudSelect>
+
+            <MudSelect @bind-Value="Location" Label="Location" Variant="Variant.Text" Disabled="string.IsNullOrEmpty(Subcountry)">
+                @foreach (string item in LocationItems)
+                {
+                    <MudSelectItem Value="@item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_Austria.svg" height="14" class="mr-1" /> @item
+                    </MudSelectItem>
+                }
+            </MudSelect>
+
+            <MudSelect @bind-Value="SubLocation" Label="Sub Location" Variant="Variant.Text" Disabled="string.IsNullOrEmpty(Location)">
+                @foreach (string item in SubLocationItems)
+                {
+                    <MudSelectItem Value="@item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_Austria.svg" height="14" class="mr-1" /> @item
+                    </MudSelectItem>
+                }
+            </MudSelect>
+
+
+            <MudSelect @bind-Value="Village" Label="Village" Variant="Variant.Text" Disabled="string.IsNullOrEmpty(SubLocation)">
+                @foreach (string item in VillageItems)
+                {
+                    <MudSelectItem Value="@item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_Austria.svg" height="14" class="mr-1" /> @item
+                    </MudSelectItem>
+                }
+            </MudSelect>
+        </MudPaper> *@
+
+        <MudTextField @bind-Value="Item.Profile.PhoneNumber"
+                      Label="Phone Number"
+                      InputType="InputType.Telephone"
+                      Placeholder="Enter phone number"
+                      Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Phone"
+                      Immediate="true"
+                      MaxLength="10"
+                      For="@(() => Item.Profile.PhoneNumber)" />
+
+
+        <MudSelect @bind-Value="Item.Scheme.SchemeType" Label="Select Scheme" OpenIcon="@Icons.Material.Filled.Person2" AdornmentColor="Color.Secondary">
+            @foreach (SchemeOption item in Enum.GetValues(typeof(SchemeOption)))
+            {
+                <MudSelectItem Value="@item">@item.GetDisplayName()</MudSelectItem>
+            }
+        </MudSelect>
+
+        <MudTextField @bind-Value="Item.Scheme.OtherScheme"
+                      For="@(() => Item.Scheme.OtherScheme)"
+                      Immediate="true"
+                      Disabled="@(Item.Scheme.SchemeType!=SchemeOption.ANY_OTHER)"
+                      Label="Any Other Scheme" />
+
+
+
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Submit" Color="Color.Primary">Save</MudButton>
@@ -16,7 +136,7 @@
 @code {
     [CascadingParameter] IMudDialogInstance MudDialog { get; set; }
 
-    [Parameter] public ApplicationItem Item { get; set; } = new();
+    [Parameter] public ApplicationVM Item { get; set; } = new();
 
     private void Submit() => MudDialog.Close(DialogResult.Ok(Item));
     private void Cancel() => MudDialog.Cancel();
