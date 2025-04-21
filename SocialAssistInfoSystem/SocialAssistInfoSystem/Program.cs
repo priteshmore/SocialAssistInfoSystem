@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddHttpClient();
 // Add MudBlazor services
 builder.Services.AddMudServices();
 

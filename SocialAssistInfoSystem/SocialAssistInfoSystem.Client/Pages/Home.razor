@@ -113,8 +113,9 @@
 
 @code {
 
-    // [Inject]
-    // private HttpClient Http { get; set; }
+    [Inject]
+    private HttpClient objHttpClient { get; set; }
+
     private MudTable<ApplicationVM> table;
     private ObservableCollection<ApplicationVM> Elements = new ObservableCollection<ApplicationVM>();
     private bool _readOnly;
@@ -130,12 +131,14 @@
     private string searchString = string.Empty;
 
     List<ApplicationDto> applicationList;
-    HttpClient objHttpClient;
+
+  
+    // HttpClient objHttpClient;
 
     public async void LoadData()
     {
-        objHttpClient = new HttpClient();
-        objHttpClient.BaseAddress = new Uri("https://localhost:7085/");
+        // objHttpClient = new HttpClient();
+        // objHttpClient.BaseAddress = new Uri("https://localhost:7085/");
         // applicationList = await objHttpClient.GetFromJsonAsync<List<ApplicationDto>>("api/application");
 
         var response = await objHttpClient.GetAsync("api/application");
@@ -229,8 +232,8 @@
                 Elements[index] = updated;
                 FilteredItems[index] = updated;
 
-                objHttpClient = new HttpClient();
-                objHttpClient.BaseAddress = new Uri("https://localhost:7085/");
+                // objHttpClient = new HttpClient();
+                // objHttpClient.BaseAddress = new Uri("https:localhost:7085/");
 
                 // var Data = await objHttpClient.GetFromJsonAsync<List<object>>("api/application");
                 ApplicationDto objApplicationDto = Extensions.Convert(updated);
