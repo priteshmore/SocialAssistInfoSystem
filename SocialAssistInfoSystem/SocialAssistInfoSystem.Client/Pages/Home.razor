@@ -8,96 +8,107 @@
 @using SocialAssistInfoSystem.Client.Util
 @using SocialAssistInfoSystem.Data.DBEntity
 @using System.Text.Json
-@* @attribute [Authorize] *@
+@attribute [Authorize]
 @inject ISnackbar Snackbar
 @inject IDialogService DialogService
 
+<PageTitle>Home</PageTitle>
 
-@if (!OperatingSystem.IsBrowser())
-{
-    <h1>Loading Application in browser throught web assembly...</h1>
+<AuthorizeView>
 
-}
-else
-{
-    <PageTitle>Home</PageTitle>
+    <NotAuthorized>
+        <p>You are not logged in.</p>
+    </NotAuthorized>
+    <Authorized>
 
-    <AuthorizeView>
-        @*  <MudText Color="Color.Success" Class="mb-4">Hello @context.User.Identity?.Name!</MudText> *@
+        @if (!OperatingSystem.IsBrowser())
+        {
+            <MudProgressCircular Indeterminate="true" Color="Color.Primary" Size="Size.Large" />
+            <h1>Loading WebAssembly...</h1>
 
-        <MudPaper Class="pa-16 ma-2" Elevation="0">
+        }
+        else
+        {
+
+
+
+            @*  <MudText Color="Color.Success" Class="mb-4">Hello @context.User.Identity?.Name!</MudText> *@
+
+            @*   <MudPaper Class="pa-16 ma-2" Elevation="0">
             <MudFab Color="Color.Primary" StartIcon="@Icons.Custom.FileFormats.FileDocument" Label="Application for Scheme" Href="/application" />
-        </MudPaper>
-    </AuthorizeView>
-
-    @if (Elements != null)
-    {
-        <MudStack Row="true">
-            <MudTextField @bind-Value="searchString" Label="Search" Variant="Variant.Text" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" Immediate="true" OnBlur="ApplyFilter" />
-
-            <MudButton OnClick="ApplyFilter" Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.FilterList">
-                Apply Filter
-            </MudButton>
-        </MudStack>
-        <MudPaper Class="p-4">
-            <MudTable Items="@FilteredItems" @ref="table" @bind-Page="currentPage"
-            Bordered="true"
-            Hover="true"
-            Breakpoint="Breakpoint.Sm"
-            Elevation="2"
-            RowsPerPage="2">
-                <ToolBarContent>
-                    <MudButton Color="Color.Primary" OnClick="OpenAddDialog">Add</MudButton>
-                    <MudButton Color="Color.Primary" OnClick="LoadData">Refresh</MudButton>
-                </ToolBarContent>
-
-                <HeaderContent>
-                    <MudTh>Application Id</MudTh>
-                    <MudTh>Profile Id</MudTh>
-                    <MudTh>Full Name</MudTh>
-                    <MudTh>Status</MudTh>
-                    <MudTh>LastName</MudTh>
-                    <MudTh>Actions</MudTh>
-                </HeaderContent>
-
-                <RowTemplate>
-                    <MudTd DataLabel="Application ID">
-                        @context.Id
-                    </MudTd>
-                    <MudTd DataLabel="Application ID">
-                        @context.Profile.Id
-                    </MudTd>
-                    <MudTd DataLabel="Full Name">
-                        @context.Profile.FirstName @context.Profile.MiddleName @context.Profile.LastName
-                    </MudTd>
-                    <MudTd DataLabel="Middle Name">
-                        @context.Status
-                    </MudTd>
-
-                    <MudTd>
-                        <MudButton StartIcon="@Icons.Material.Filled.Edit"
-                        OnClick="() => OpenEditDialog(context)"
-                        Color="Color.Info"
-                        Variant="Variant.Filled"
-                        Size="Size.Small">
-                            Edit
-                        </MudButton>
-
-                        <MudButton Icon="@Icons.Material.Filled.Delete" OnClick="() => Delete(context)" Color="Color.Error" Variant="Variant.Filled" Size="Size.Small">Delete</MudButton>
-                    </MudTd>
-                </RowTemplate>
-            </MudTable>
-        </MudPaper>
-
-    }
-    else
-    {
-        <h1>Loading Data...</h1>
-    }
+        </MudPaper> *@
 
 
-}
+            @if (Elements != null)
+            {
+                <MudStack Row="true">
+                    <MudTextField @bind-Value="searchString" Label="Search" Variant="Variant.Text" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" Immediate="true" OnBlur="ApplyFilter" />
 
+                    <MudButton OnClick="ApplyFilter" Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.FilterList">
+                        Apply Filter
+                    </MudButton>
+                </MudStack>
+                <MudPaper Class="p-4">
+                    <MudTable Items="@FilteredItems" @ref="table" @bind-Page="currentPage"
+                    Bordered="true"
+                    Hover="true"
+                    Breakpoint="Breakpoint.Sm"
+                    Elevation="2"
+                    RowsPerPage="2">
+                        <ToolBarContent>
+                            <MudButton Color="Color.Primary" OnClick="OpenAddDialog">Add</MudButton>
+                            <MudButton Color="Color.Primary" OnClick="LoadData">Refresh</MudButton>
+                        </ToolBarContent>
+
+                        <HeaderContent>
+                            <MudTh>Application Id</MudTh>
+                            <MudTh>Profile Id</MudTh>
+                            <MudTh>Full Name</MudTh>
+                            <MudTh>Status</MudTh>
+                            <MudTh>LastName</MudTh>
+                            <MudTh>Actions</MudTh>
+                        </HeaderContent>
+
+                        <RowTemplate Context="Item">
+                            <MudTd DataLabel="Application ID">
+                                @Item.Id
+                            </MudTd>
+                            <MudTd DataLabel="Application ID">
+                                @Item.Profile.Id
+                            </MudTd>
+                            <MudTd DataLabel="Full Name">
+                                @Item.Profile.FirstName @Item.Profile.MiddleName @Item.Profile.LastName
+                            </MudTd>
+                            <MudTd DataLabel="Middle Name">
+                                @Item.Status
+                            </MudTd>
+
+                            <MudTd>
+                                <MudButton StartIcon="@Icons.Material.Filled.Edit"
+                                OnClick="() => OpenEditDialog(Item)"
+                                Color="Color.Info"
+                                Variant="Variant.Filled"
+                                Size="Size.Small">
+                                    Edit
+                                </MudButton>
+
+                                <MudButton Icon="@Icons.Material.Filled.Delete" OnClick="() => Delete(Item)" Color="Color.Error" Variant="Variant.Filled" Size="Size.Small">Delete</MudButton>
+                            </MudTd>
+                        </RowTemplate>
+                    </MudTable>
+                </MudPaper>
+
+            }
+            else
+            {
+                <h1>Loading Data...</h1>
+            }
+
+
+        }
+
+    </Authorized>
+</AuthorizeView>
 
 
 @code {
@@ -140,11 +151,12 @@ else
             // lstData = Extensions.CopyListProperties<ApplicationDTO, ApplicationItem>(applications);
 
             Elements = new ObservableCollection<ApplicationVM>(lstData);
+            FilteredItems.Clear();
             FilteredItems = Elements;
 
             Snackbar.Add("Application Fetch Sucessfully...", Severity.Info);
             // Elements = await httpClient.GetFromJsonAsync<List<ApplicationItem>>("webapi/periodictable");
-            StateHasChanged();
+            // StateHasChanged();
         }
         else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
         {
@@ -155,7 +167,7 @@ else
             Snackbar.Add(response.StatusCode.ToString(), Severity.Error);
         }
 
-
+        StateHasChanged();
     }
 
 
@@ -165,69 +177,23 @@ else
         if (firstRender)
         {
             LoadData();
-            // objHttpClient = new HttpClient();
-            // objHttpClient.BaseAddress = new Uri("https://localhost:7085/");
-            // // applicationList = await objHttpClient.GetFromJsonAsync<List<ApplicationDto>>("api/application");
-
-            // var response = await objHttpClient.GetAsync("api/application");
-
-
-            // if (response.IsSuccessStatusCode)
-            // {
-            //     var json = await response.Content.ReadAsStringAsync();
-            //     applicationList = JsonSerializer.Deserialize<List<ApplicationDto>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-            //     List<ApplicationVM> lstData = new List<ApplicationVM>();
-
-            //     lstData = Extensions.ConvertList(applicationList);
-            //     // lstData = Extensions.CopyListProperties<ApplicationDTO, ApplicationItem>(applications);
-
-            //     Elements = new ObservableCollection<ApplicationVM>(lstData);
-            //     FilteredItems = Elements;
-            //     // Elements = await httpClient.GetFromJsonAsync<List<ApplicationItem>>("webapi/periodictable");
-            //     StateHasChanged();
-            // }
-            // else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-            // {
-            //     Snackbar.Add("Application not found.", Severity.Info);
-            // }
-            // else
-            // {
-            //     Snackbar.Add(response.StatusCode.ToString(), Severity.Error);
-            // }
-
-
-
-
-
+            StateHasChanged();
         }
-
-        // Re-render after data load
-
-        // if (firstRender)
-        // {
-        //     //@if (OperatingSystem.IsBrowser())
-        //     {
-
-
-
-        //     }
-
-
-        //     StateHasChanged(); // Re-render after data load
-        // }
     }
 
     #region Operation
     async void Delete(ApplicationVM Item)
     {
-        Elements.Remove(Item);
-        FilteredItems = Elements;
-        LoadData();
-        // ApplicationDto objApplicationDto = Extensions.Convert(Item);
-        // var response = await objHttpClient.DeleteFromJsonAsync($"api/application/{objApplicationDto.Id}", objApplicationDto);
 
         var response = await objHttpClient.DeleteAsync($"api/application/{Item.Id}");
         Snackbar.Add("Person deleted", Severity.Warning);
+
+        LoadData();
+
+        Elements.Remove(Item);
+        FilteredItems = Elements;
+
+        StateHasChanged();
     }
 
     void Save(ApplicationViewModel Item)
@@ -322,7 +288,7 @@ else
                     // Check if the response is successful
                     response.EnsureSuccessStatusCode();
 
-                    Elements.Add(Item);
+                    // Elements.Add(Item);
 
                     LoadData();
                     // FilteredItems.Add(Item);
@@ -332,7 +298,7 @@ else
                 catch (Exception ex)
                 {
 
-
+                    Snackbar.Add(ex.Message);
                 }
 
 
