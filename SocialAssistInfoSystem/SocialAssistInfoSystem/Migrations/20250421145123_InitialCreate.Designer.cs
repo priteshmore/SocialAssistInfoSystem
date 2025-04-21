@@ -12,7 +12,7 @@ using SocialAssistInfoSystem.Data;
 namespace SocialAssistInfoSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250421142301_InitialCreate")]
+    [Migration("20250421145123_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
