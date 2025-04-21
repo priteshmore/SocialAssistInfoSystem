@@ -3,19 +3,9 @@
 @inject NavigationManager NavigationManager
 
 <MudNavMenu>
-@*     <MudNavLink Href="/application" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Application</MudNavLink> *@
-    @* <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink> *@
     <AuthorizeView>
         <Authorized>
             <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
-            @* <MudNavLink Href="application" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AppRegistration">Application</MudNavLink> *@
-         @*    <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink> *@
-           @*  <MudNavLink Href="counter" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Add">Counter</MudNavLink> *@
-
-            <MudNavLink Href="weather" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">Weather</MudNavLink>
-
-           @*  <MudNavLink Href="auth" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Lock">Auth Required</MudNavLink> *@
-
             <MudNavLink Href="Account/Manage" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Person">Account</MudNavLink>
             @context.User.Identity?.Name
             <form action="Account/Logout" method="post">
@@ -27,7 +17,6 @@
             </form>
         </Authorized>
         <NotAuthorized>
-           @*  <MudNavLink Href="Account/Register" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Person">Register</MudNavLink> *@
             <MudNavLink Href="Account/Login" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Password">Login</MudNavLink>
         </NotAuthorized>
     </AuthorizeView>

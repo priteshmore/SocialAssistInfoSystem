@@ -6,12 +6,6 @@
 @using SocialAssistInfoSystem.Client.Util
 <MudDialog>
     <DialogContent>
-        @*   <MudTextField @bind-Value="Item.Id" Label="ID"  Disabled="true"/>
-        <MudTextField @bind-Value="Item.FirstName" Label="First Name" />
-        <MudTextField @bind-Value="Item.MiddleName" Label="Middle Name" />
-        <MudTextField @bind-Value="Item.LastName" Label="Last Name" />
-        <MudDatePicker @bind-Date="Item.DOB" Label="Date of Birth" /> *@
-
         <MudPaper Class="d-flex flex-wrap gap-4" MaxWidth="auto" Elevation="0">
 
             <MudTextField @bind-Value="Item.Profile.FirstName"
