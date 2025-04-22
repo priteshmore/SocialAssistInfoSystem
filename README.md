@@ -24,5 +24,5 @@ Navigate to the terminal within the SocialAssistInfoSystem server project direct
 
 Execute the following commands:
 
-dotnet ef migrations add InitialCreate
-dotnet ef database update
+1. dotnet ef migrations add InitialCreate
+2. dotnet ef database update
