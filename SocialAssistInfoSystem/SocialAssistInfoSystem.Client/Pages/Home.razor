@@ -321,8 +321,8 @@
                      (!string.IsNullOrEmpty(item.Profile.MiddleName) && item.Profile.MiddleName.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
                      (!string.IsNullOrEmpty(item.Profile.LastName) && item.Profile.LastName.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
                      (item.Status.ToString().Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
-                     (item.Id == int.Parse(searchString)) ||
-                     (item.Id == int.Parse(searchString))
+                     ((int.TryParse(searchString, out int nAppId) && item.Id == nAppId) ||
+                     ((int.TryParse(searchString, out int nProfileId) && item.Profile.Id == nProfileId)))
                      )).ToObservableCollection();
 
         }
