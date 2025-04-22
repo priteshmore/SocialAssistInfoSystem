@@ -39,10 +39,6 @@ namespace SocialAssistInfoSystem.Controller
                 return NotFound(lstItems);
             }
 
-            //var jsonResponse = JsonSerializer.Serialize(lstItems);
-
-            //return Content(jsonResponse, "application/json");
-
             return Ok(lstItems);
         }
 
@@ -130,49 +126,8 @@ namespace SocialAssistInfoSystem.Controller
                 await DbContext.SaveChangesAsync();
             }
 
-
-
-
-            //var ExistingEntity = DbContext.Applications.FindAsync(obj.Id)();
-            //if (Entity != null)
-            //{
-            //    Application objApplicationEntity = StdUtil.Convert(obj);
-            //    objApplicationEntity.Id = Entity.Id;
-
-            //    DbContext.Entry(objApplicationEntity).State = EntityState.Modified;
-
-            //    #region Old Code
-            //    //try
-            //    //{
-            //    //    await DbContext.SaveChangesAsync();
-            //    //}
-            //    //catch (DbUpdateConcurrencyException)
-            //    //{
-            //    //    if (!DbContext.Applications.Any(e => e.Id == Id))
-            //    //        return NotFound();
-            //    //    else
-            //    //        throw;
-            //    //}
-            //    #endregion
-
-
-            //    using var transaction = await DbContext.Database.BeginTransactionAsync();
-            //    try
-            //    {
-            //        // Perform operations
-            //        await DbContext.SaveChangesAsync();
-            //        await transaction.CommitAsync();
-            //    }
-            //    catch
-            //    {
-            //        await transaction.RollbackAsync();
-            //    }
-
-            //}
-
             return Ok(existingEntity);
 
-            return NoContent();
         }
 
 

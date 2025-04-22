@@ -24,8 +24,6 @@
         @if (!OperatingSystem.IsBrowser())
         {
             <MudProgressCircular Indeterminate="true" Color="Color.Primary" Size="Size.Large" />
-            <h1>Loading WebAssembly...</h1>
-
         }
         else
         {
@@ -49,12 +47,13 @@
                     </MudButton>
                 </MudStack>
                 <MudPaper Class="p-4">
-                    <MudTable Items="@FilteredItems" @ref="table" @bind-Page="currentPage" 
-                    Bordered="true"
-                    Hover="true"
-                    Breakpoint="Breakpoint.Sm"
-                    Elevation="2"
-                    RowsPerPage="2">
+                    <MudTable Items="@FilteredItems" @ref="table" @bind-Page="currentPage"
+                              Bordered="true"
+                              Hover="true"
+                              Breakpoint="Breakpoint.Sm"
+                              Elevation="2"
+                              RowsPerPage="@rowsPerPage"
+                              CurrentPageChanged="OnPageChanged">
                         <ToolBarContent>
                             <MudButton Color="Color.Primary" OnClick="OpenAddDialog">Add</MudButton>
                             <MudButton Color="Color.Primary" OnClick="LoadData">Refresh</MudButton>
@@ -85,10 +84,10 @@
 
                             <MudTd>
                                 <MudButton StartIcon="@Icons.Material.Filled.Edit"
-                                OnClick="() => OpenEditDialog(Item)"
-                                Color="Color.Info"
-                                Variant="Variant.Filled"
-                                Size="Size.Small">
+                                           OnClick="() => OpenEditDialog(Item)"
+                                           Color="Color.Info"
+                                           Variant="Variant.Filled"
+                                           Size="Size.Small">
                                     Edit
                                 </MudButton>
 
@@ -113,8 +112,8 @@
 
 @code {
 
-    [Inject]
-    private HttpClient objHttpClient { get; set; }
+        [Inject]
+        private HttpClient objHttpClient { get; set; }
 
     private MudTable<ApplicationVM> table;
     private ObservableCollection<ApplicationVM> Elements = new ObservableCollection<ApplicationVM>();
@@ -125,14 +124,14 @@
     private ApplicationViewModel? selectedApplicationItem;
 
     private int currentPage = 0;
-
+    private int rowsPerPage = 2; // Set the number of rows per page
 
     private ObservableCollection<ApplicationVM> FilteredItems = new();
     private string searchString = string.Empty;
 
     List<ApplicationDto> applicationList;
 
-  
+
     // HttpClient objHttpClient;
 
     public async void LoadData()
@@ -319,9 +318,29 @@
         {
             FilteredItems = Elements.ToList().Where(item =>
                      (!string.IsNullOrEmpty(item.Profile.FirstName) && item.Profile.FirstName.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
-                     (!string.IsNullOrEmpty(item.Profile.LastName) && item.Profile.LastName.Contains(searchString, StringComparison.OrdinalIgnoreCase))).ToObservableCollection();
+                     (!string.IsNullOrEmpty(item.Profile.MiddleName) && item.Profile.MiddleName.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
+                     (!string.IsNullOrEmpty(item.Profile.LastName) && item.Profile.LastName.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
+                     (item.Status.ToString().Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                     (item.Id == int.Parse(searchString)) ||
+                     (item.Id == int.Parse(searchString))
+                     )).ToObservableCollection();
 
         }
+    }
+
+
+    // Called when the page changes in MudTable
+    private void OnPageChanged(int page)
+    {
+        currentPage = page;
+        UpdateFilteredItems();
+    }
+
+    // Update FilteredItems based on the current page
+    private void UpdateFilteredItems()
+    {
+        // FilteredItems = FilteredItems.Skip(currentPage * rowsPerPage).Take(rowsPerPage).ToObservableCollection();
+        // FilteredItems = FilteredItems.Skip(currentPage * rowsPerPage).Take(rowsPerPage).ToList();
     }
     #endregion
 
